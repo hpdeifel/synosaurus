@@ -76,7 +76,7 @@
    *Wordnet* is a English thesaurus, that can be installed as a separate program
    called /wn/, that is used offline. Wordnet can do lot's of things other than
    simple lists of synonyms (for example synonym-groups). Not many of these
-   features are supported by synosaurus, yes. This is a goal for the future.
+   features are supported by synosaurus, yet. This is a goal for the future.
    Wordnet's lookup function is called ~wordnet-lookup~.
 
 ** Dependencies
