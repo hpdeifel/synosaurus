@@ -28,7 +28,7 @@
 (require 'url)
 
 (eval-when-compile
-  '(require 'cl))
+  (require 'cl))
 
 (defvar openthesaurus-url
   "http://www.openthesaurus.de/synonyme/search?q=%s&format=text/xml")

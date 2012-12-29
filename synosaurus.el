@@ -26,6 +26,9 @@
 
 (require 'button)
 
+(eval-when-compile
+  (require 'cl))
+
 (defvar synosaurus-lookup-function nil
   "The function that is used to talk to the backend
 
