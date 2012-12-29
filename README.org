@@ -1,0 +1,69 @@
+* Synosaurus
+
+  Synosaurus is a thesaurus fontend for Emacs with pluggable backends.
+
+** Getting Started
+
+   - Add the synosaurus directory to your load-path:
+     
+     : (add-to-list 'load-path "/path/to/synosaurus")
+     
+   - Require the synosaurus frontend and a one or more backends.
+
+     #+BEGIN_SRC elisp
+     (require 'synosaurus)
+     (require 'synosaurus-openthesaurus) ; example backend
+     #+END_SRC
+
+   - Select your favorite backend (e.g. openthesaurus)
+
+     #+BEGIN_SRC elisp
+     (setq synosaurus-lookup-function 'openthesaurus-lookup)
+     #+END_SRC
+
+   - Bind synosaurus to a keybinding. Theses are just examples, you can of
+     course use your favorite keys and/or your favorite backend.
+
+     #+BEGIN_SRC elisp
+     (global-set-key (kbd "C-c s l") 'synosaurus-lookup)
+     (global-set-key (kbd "C-c s r") 'synosaurus-choose-and-replace)
+     #+END_SRC
+
+** Usage
+
+   The main commands for you to use are:
+
+   - ~synosaurus-lookup~ :: Queries you for a word, looks it up in the
+        thesaurus and shows you a list of alternatives. You can click or press
+        RET on these alternatives to look them up instead.
+
+   - ~synosaurus-choose-and-replace~ :: Look up the word under the cursor, asks
+        you to select one of the alternatives and replaces the original word
+        with you selection. You can configure different methods for the
+        alternative selection, see below.
+
+** Configuration
+
+   There are currently only two things you can configure:
+
+   - ~synosaurus-lookup-function~
+     
+     Set this to the lookup function of the thesaurus backend you want to use.
+     See below for available backends.
+
+   - ~synosaurus-choose-method~
+     
+     The way, ~synosaurus-choose-and-replace~ should query you for
+     alternatives. The following symbols are acceptable values.
+
+     - popup :: Use the library popup.el to show a popup with alternatives.
+                This is recommended and the default, but you will need to
+                install popup.el separately.
+
+     - ido :: Use IDO to show a nice fuzzy matching completing minibuffer.
+       
+     - t :: Use the normal minibuffer completion.
+
+** Dependencies
+
+   - popup.el, if you want to use the /popup/ method for choosing alternatives.
