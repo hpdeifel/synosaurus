@@ -64,6 +64,21 @@
        
      - t :: Use the normal minibuffer completion.
 
+** Backends
+
+   Two thesaurus backends are implemented right now in various states of
+   completion.
+
+   *Openthesaurus* is a open German thesaurus and is supported quite well, but
+   needs an Internet connection to be queried. It's lookup function is called
+   ~openthesaurus-lookup~.
+
+   *Wordnet* is a English thesaurus, that can be installed as a separate program
+   called /wn/, that is used offline. Wordnet can do lot's of things other than
+   simple lists of synonyms (for example synonym-groups). Not many of these
+   features are supported by synosaurus, yes. This is a goal for the future.
+   Wordnet's lookup function is called ~wordnet-lookup~.
+
 ** Dependencies
 
    - popup.el, if you want to use the /popup/ method for choosing alternatives.
