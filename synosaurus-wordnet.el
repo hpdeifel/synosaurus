@@ -20,6 +20,10 @@
 
 ;;; Commentary:
 
+;;; A english thesaurus
+;;;
+;;; You will need to have the wn programm installed
+
 ;;; Code:
 
 (require 'synosaurus)
