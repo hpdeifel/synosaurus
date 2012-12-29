@@ -20,13 +20,16 @@
 
 ;;; Commentary:
 
-;; TODO
+;; Please see the readme
 
 ;;; Code:
 
 (require 'button)
 
-(defvar synosaurus-lookup-function nil)
+(defvar synosaurus-lookup-function nil
+  "The function that is used to talk to the backend
+
+TODO: Add required function signature and semantic")
 
 (defun synosaurus-internal-lookup (word)
   (if synosaurus-lookup-function
@@ -66,6 +69,14 @@
 (define-derived-mode synosaurus-list-mode special-mode "Synosaurus")
 
 (defun synosaurus-lookup (word)
+  "Lookup a word in the thesaurus.
+
+Queries the user for a word and looks it up in a thesaurus using
+`synosaurus-lookup-function'.
+
+The resulting synonym list will be shown in a new buffer, where
+the words are clickable to look them up instead of the original
+word."
   (interactive (synosaurus-interactive))
   (let ((inhibit-read-only t))
     (with-current-buffer (get-buffer-create "*Synonyms List*")
@@ -91,7 +102,14 @@
       (synosaurus-list-mode)))
   (display-buffer "*Synonyms List*"))
 
-(defvar synosaurus-choose-method 'popup)
+(defvar synosaurus-choose-method 'popup
+  "The method that is used to query the user for alternatives.
+
+Valid values are:
+
+  - popup         : Use popup.el to show a nice poopu with alternatives
+  - ido           : Use IDO to read an alternative with completion
+  - anything other: Use normal minibuffer completion.")
 
 (defun synosaurus-choose (list)
   (let ((completion-prompt "Replacement: "))
@@ -101,6 +119,11 @@
      (otherwise (completing-read completion-prompt list)))))
 
 (defun synosaurus-choose-and-replace ()
+  "Replace the word under the cursor by a synonyme.
+
+Look up the word in the thesaurus specified by
+`synosaurus-lookup-function', let the user choose an alternative
+and replace the original word with that."
   (interactive "")
   (let* ((word (synosaurus-guess-default))
          (syns
