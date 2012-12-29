@@ -117,8 +117,13 @@ Valid values are:
 (defun synosaurus-choose (list)
   (let ((completion-prompt "Replacement: "))
    (case synosaurus-choose-method
-     (popup (popup-menu* list))
-     (ido   (ido-completing-read completion-prompt list))
+     (popup
+      (unless (require 'popup nil t)
+        (error "Please install popup.el to use the popup choose-method"))
+      (popup-menu* list))
+     (ido
+      (require 'ido)
+      (ido-completing-read completion-prompt list))
      (otherwise (completing-read completion-prompt list)))))
 
 (defun synosaurus-choose-and-replace ()
