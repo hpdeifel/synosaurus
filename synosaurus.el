@@ -25,9 +25,7 @@
 ;;; Code:
 
 (require 'button)
-
-(eval-when-compile
-  (require 'cl))
+(require 'cl-lib)
 
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
@@ -105,7 +103,7 @@ word."
       (insert
        (propertize (format "Synonyms of %s:\n\n" word)
                    'face 'success))
-      (flet ((ins (syn)
+      (cl-flet ((ins (syn)
                   (unless (string= word syn)
                     (insert " ")
                     (insert-text-button syn

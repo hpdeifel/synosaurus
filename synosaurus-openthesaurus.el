@@ -27,8 +27,7 @@
 (require 'synosaurus)
 (require 'url)
 
-(eval-when-compile
-  (require 'cl))
+(require 'cl-lib)
 
 (defvar openthesaurus-url
   "http://www.openthesaurus.de/synonyme/search?q=%s&format=text/xml")
@@ -37,7 +36,7 @@
   (when (and path (eq (car path) (car tree)))
     (if (null (cdr path))
         (funcall fun tree)
-      (loop for child in (cddr tree)
+      (cl-loop for child in (cddr tree)
             for res = (openthesaurus-xml-collect child (cdr path) fun)
             when res collect res))))
 
