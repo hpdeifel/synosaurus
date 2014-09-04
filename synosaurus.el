@@ -34,6 +34,22 @@
 
 TODO: Add required function signature and semantic")
 
+(defgroup synosaurus nil "An extensible thesaurus mode"
+  :group 'convenience
+  :group 'text)
+
+(defcustom synosaurus-choose-method 'ido
+  "The method that is used to query the user for alternatives.
+
+Valid values are:
+
+  - popup         : Use popup.el to show a nice poopu with alternatives
+  - ido           : Use IDO to read an alternative with completion
+  - default       : Use normal minibuffer completion."
+  :group 'synosaurus
+  :type  'symbol
+  :options '(popup ido default))
+
 (defun synosaurus-internal-lookup (word)
   (if synosaurus-lookup-function
       (funcall synosaurus-lookup-function word)
@@ -104,15 +120,6 @@ word."
         (error nil))
       (synosaurus-list-mode)))
   (display-buffer "*Synonyms List*"))
-
-(defvar synosaurus-choose-method 'popup
-  "The method that is used to query the user for alternatives.
-
-Valid values are:
-
-  - popup         : Use popup.el to show a nice poopu with alternatives
-  - ido           : Use IDO to read an alternative with completion
-  - anything other: Use normal minibuffer completion.")
 
 (defun synosaurus-choose (list)
   (let ((completion-prompt "Replacement: "))
