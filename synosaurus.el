@@ -27,12 +27,10 @@
 (require 'button)
 (require 'cl-lib)
 
-;;;###autoload
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
   :group 'text)
 
-;;;###autoload
 (defcustom synosaurus-choose-method 'ido
   "The method that is provide the user with alternatives.
 
@@ -45,7 +43,6 @@ Valid values are:
   :type  'symbol
   :options '(popup ido default))
 
-;;;###autoload
 (defcustom synosaurus-backend 'synosaurus-backend-wordnet
   "The backend for the thesaurus
 
@@ -55,6 +52,11 @@ Built-in backends are
   - synosaurus-backend-openthesaurus  An german online thesaurus"
   :group 'synosaurus
   :type  'function)
+
+(defcustom synosaurus-prefix (kbd "C-c s")
+  "Synosaurus keymap prefix"
+  :group 'synosaurus
+  :type 'string)
 
 (defun synosaurus-internal-lookup (word)
   (if synosaurus-backend
@@ -159,6 +161,25 @@ and replace the original word with that."
       (delete-region (beginning-of-thing 'word)
                      (end-of-thing 'word)))
     (insert res)))
+
+(defvar synosaurus-command-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "l") 'synosaurus-lookup)
+    (define-key map (kbd "r") 'synosaurus-choose-and-replace)
+    map))
+(fset 'synosaurus-command-map synosaurus-command-map)
+
+(defvar synosaurus-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map synosaurus-prefix 'synosaurus-command-map)
+    map))
+
+;;;###autoload
+(define-minor-mode synosaurus-mode
+  "synosaurus mode"
+  :lighter " Syn"
+  :keymap synosaurus-mode-map
+  :group 'synosaurus)
 
 (provide 'synosaurus)
 ;;; synosaurus.el ends here
