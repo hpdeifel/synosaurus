@@ -29,17 +29,12 @@
 (eval-when-compile
   (require 'cl))
 
-(defvar synosaurus-lookup-function nil
-  "The function that is used to talk to the backend
-
-TODO: Add required function signature and semantic")
-
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
   :group 'text)
 
 (defcustom synosaurus-choose-method 'ido
-  "The method that is used to query the user for alternatives.
+  "The method that is provide the user with alternatives.
 
 Valid values are:
 
@@ -50,9 +45,16 @@ Valid values are:
   :type  'symbol
   :options '(popup ido default))
 
+(defcustom synosaurus-backend nil
+  "The backend that should be used to query the thesaurus
+
+Build in backends are openthesaurus and wordnet"
+  :group 'synosaurus
+  :type  'function)
+
 (defun synosaurus-internal-lookup (word)
-  (if synosaurus-lookup-function
-      (funcall synosaurus-lookup-function word)
+  (if synosaurus-backend
+      (funcall synosaurus-backend word)
     (error "No thesaurus lookup function specified")))
 
 (defun synosaurus-strip-properties (string)
@@ -91,7 +93,7 @@ Valid values are:
   "Lookup a word in the thesaurus.
 
 Queries the user for a word and looks it up in a thesaurus using
-`synosaurus-lookup-function'.
+`synosaurus-backend'.
 
 The resulting synonym list will be shown in a new buffer, where
 the words are clickable to look them up instead of the original
@@ -137,7 +139,7 @@ word."
   "Replace the word under the cursor by a synonyme.
 
 Look up the word in the thesaurus specified by
-`synosaurus-lookup-function', let the user choose an alternative
+`synosaurus-backend', let the user choose an alternative
 and replace the original word with that."
   (interactive "")
   (let* ((word (synosaurus-guess-default))
