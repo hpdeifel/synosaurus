@@ -52,6 +52,7 @@ Built-in backends are
   - synosaurus-backend-openthesaurus  An german online thesaurus"
   :group 'synosaurus
   :type  'function)
+(make-variable-buffer-local 'synosaurus-backend)
 
 (defcustom synosaurus-prefix (kbd "C-c s")
   "Synosaurus keymap prefix"
