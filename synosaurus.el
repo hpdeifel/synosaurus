@@ -27,10 +27,12 @@
 (require 'button)
 (require 'cl-lib)
 
+;;;###autoload
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
   :group 'text)
 
+;;;###autoload
 (defcustom synosaurus-choose-method 'ido
   "The method that is provide the user with alternatives.
 
@@ -43,10 +45,14 @@ Valid values are:
   :type  'symbol
   :options '(popup ido default))
 
-(defcustom synosaurus-backend nil
-  "The backend that should be used to query the thesaurus
+;;;###autoload
+(defcustom synosaurus-backend 'synosaurus-backend-wordnet
+  "The backend for the thesaurus
 
-Build in backends are openthesaurus and wordnet"
+Built-in backends are
+
+  - synosaurus-backend-wordnet        An english offline thesaurus
+  - synosaurus-backend-openthesaurus  An german online thesaurus"
   :group 'synosaurus
   :type  'function)
 
@@ -87,6 +93,7 @@ Build in backends are openthesaurus and wordnet"
 
 (define-derived-mode synosaurus-list-mode special-mode "Synosaurus")
 
+;;;###autoload
 (defun synosaurus-lookup (word)
   "Lookup a word in the thesaurus.
 
@@ -133,6 +140,7 @@ word."
       (ido-completing-read completion-prompt list))
      (otherwise (completing-read completion-prompt list)))))
 
+;;;###autoload
 (defun synosaurus-choose-and-replace ()
   "Replace the word under the cursor by a synonyme.
 

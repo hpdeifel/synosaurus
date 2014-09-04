@@ -40,7 +40,8 @@
             for res = (openthesaurus-xml-collect child (cdr path) fun)
             when res collect res))))
 
-(defun openthesaurus-lookup (word)
+;;;###autoload
+(defun synosaurus-backend-openthesaurus (word)
   (let ((buf (url-retrieve-synchronously (format openthesaurus-url
                                                  (url-hexify-string word)))))
     (if (not buf)

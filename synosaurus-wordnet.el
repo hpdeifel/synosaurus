@@ -54,7 +54,8 @@
       (push (wordnet-collect-list) words))
     words))
 
-(defun wordnet-lookup (word)
+;;;###autoload
+(defun synosaurus-backend-wordnet (word)
   (let ((buf (get-buffer-create "*Wordnet*")))
     (with-current-buffer buf
       (erase-buffer)
