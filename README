@@ -1,3 +1,5 @@
+-*- mode: org -*-
+
 * Synosaurus
 
   Synosaurus is a thesaurus fontend for Emacs with pluggable backends.
