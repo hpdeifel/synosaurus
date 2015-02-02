@@ -34,6 +34,8 @@
 
 (require 'button)
 (require 'cl-lib)
+(require 'thingatpt)
+(require 'ido)
 
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
@@ -52,7 +54,7 @@ Valid values are:
   :options '(popup ido default))
 
 (defcustom synosaurus-backend 'synosaurus-backend-wordnet
-  "The backend for the thesaurus
+  "The backend for the thesaurus.
 
 Built-in backends are
 
@@ -63,20 +65,23 @@ Built-in backends are
 (make-variable-buffer-local 'synosaurus-backend)
 
 (defcustom synosaurus-prefix (kbd "C-c s")
-  "Synosaurus keymap prefix"
+  "Synosaurus keymap prefix."
   :group 'synosaurus
   :type 'string)
 
 (defun synosaurus-internal-lookup (word)
+  "Call current backend with `WORD'."
   (if synosaurus-backend
       (funcall synosaurus-backend word)
     (error "No thesaurus lookup function specified")))
 
 (defun synosaurus-strip-properties (string)
+  "Remove text properties from `STRING'."
   (set-text-properties 0 (length string) nil string)
   string)
 
 (defun synosaurus-guess-default ()
+  "Return region or word under cursor."
   (if (use-region-p)
       (buffer-substring-no-properties (region-beginning) (region-end))
     (synosaurus-strip-properties (thing-at-point 'word))))
@@ -84,6 +89,7 @@ Built-in backends are
 (defvar synosaurus-history nil)
 
 (defun synosaurus-interactive ()
+  "Ask the user for a word (with default)."
   (let* ((default (synosaurus-guess-default))
          (res (read-string (if default
                                (format "Word (default %s): " default)
@@ -106,7 +112,7 @@ Built-in backends are
 
 ;;;###autoload
 (defun synosaurus-lookup (word)
-  "Lookup a word in the thesaurus.
+  "Lookup `WORD' in the thesaurus.
 
 Queries the user for a word and looks it up in a thesaurus using
 `synosaurus-backend'.
@@ -140,6 +146,7 @@ word."
   (display-buffer "*Synonyms List*"))
 
 (defun synosaurus-choose (list)
+  "Choose among a `LIST' of values."
   (let ((completion-prompt "Replacement: "))
    (case synosaurus-choose-method
      (popup
