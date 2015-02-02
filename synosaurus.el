@@ -191,7 +191,20 @@ and replace the original word with that."
 
 ;;;###autoload
 (define-minor-mode synosaurus-mode
-  "synosaurus mode"
+  "Minor mode for thesaurus lookups.
+
+When called interactively, toggle `synosaurus-mode'. With prefix
+ARG, enable `synosaurus-mode' if ARG is positive, otherwise
+disable it.
+
+When called from Lisp, enable `synosaurus-mode', if ARG is
+omitted, nil or positive. If ARG is `toggle', toggle
+`synosaurus-mode'. Otherwise behave as if called interactively.
+
+The thesaurus backend can be configured with
+`synosaurus-backend'.
+
+\\{synosaurus-mode-map}"
   :lighter " Syn"
   :keymap synosaurus-mode-map
   :group 'synosaurus)
