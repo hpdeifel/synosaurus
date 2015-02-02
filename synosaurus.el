@@ -42,13 +42,16 @@
   :group 'text)
 
 (defcustom synosaurus-choose-method 'ido
-  "The method that is provide the user with alternatives.
+  "The way of querying the user for word replacements.
+
+This is used in `synosaurus-choose-and-replace'.
 
 Valid values are:
 
-  - popup         : Use popup.el to show a nice poopu with alternatives
-  - ido           : Use IDO to read an alternative with completion
-  - default       : Use normal minibuffer completion."
+  - popup   : Use popup.el to show a nice popup with alternatives.
+              The popup.el library must be installed for this to work.
+  - ido     : Use IDO to read an alternative with completion.
+  - default : Use normal minibuffer completion."
   :group 'synosaurus
   :type '(choice (const :tag "popup.el" popup)
                  (const :tag "Ido" ido)
