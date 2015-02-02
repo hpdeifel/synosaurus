@@ -148,15 +148,13 @@ word."
 (defun synosaurus-choose (list)
   "Choose among a `LIST' of values."
   (let ((completion-prompt "Replacement: "))
-   (case synosaurus-choose-method
-     (popup
-      (unless (require 'popup nil t)
-        (error "Please install popup.el to use the popup choose-method"))
-      (popup-menu* list))
-     (ido
-      (require 'ido)
-      (ido-completing-read completion-prompt list))
-     (otherwise (completing-read completion-prompt list)))))
+   (pcase synosaurus-choose-method
+     (`popup (unless (require 'popup nil t)
+               (error "Please install popup.el to use the popup choose-method"))
+             (popup-menu* list))
+     (`ido (require 'ido)
+           (ido-completing-read completion-prompt list))
+     (_ (completing-read completion-prompt list)))))
 
 ;;;###autoload
 (defun synosaurus-choose-and-replace ()
