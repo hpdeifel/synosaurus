@@ -5,29 +5,10 @@
 ** Getting Started
 
    - Add the synosaurus directory to your load-path:
-     
+
      : (add-to-list 'load-path "/path/to/synosaurus")
-     
-   - Require the synosaurus frontend and a one or more backends.
 
-     #+BEGIN_SRC elisp
-     (require 'synosaurus)
-     (require 'synosaurus-openthesaurus) ; example backend
-     #+END_SRC
-
-   - Select your favorite backend (e.g. openthesaurus)
-
-     #+BEGIN_SRC elisp
-     (setq synosaurus-lookup-function 'openthesaurus-lookup)
-     #+END_SRC
-
-   - Bind synosaurus to a keybinding. Theses are just examples, you can of
-     course use your favorite keys and/or your favorite backend.
-
-     #+BEGIN_SRC elisp
-     (global-set-key (kbd "C-c s l") 'synosaurus-lookup)
-     (global-set-key (kbd "C-c s r") 'synosaurus-choose-and-replace)
-     #+END_SRC
+   - Enable the minor mode with ~synosaurus-mode`.
 
 ** Usage
 
@@ -42,17 +23,28 @@
         with you selection. You can configure different methods for the
         alternative selection, see below.
 
+   The default keybindings are:
+
+   | Key       | Command                         |
+   |-----------+---------------------------------|
+   | =C-c s l= | ~synosaurus-lookup~             |
+   | =C-c s r= | ~synosaurus-choose-and-replace~ |
+
 ** Configuration
 
-   There are currently only two things you can configure:
+   Synosaurus can be configured through the normal customization interface of
+   emacs. Take a look at:
 
-   - ~synosaurus-lookup-function~
-     
-     Set this to the lookup function of the thesaurus backend you want to use.
-     See below for available backends.
+   : M-x customize-group synosaurus
+
+   The individual options are:
+
+   - ~synosaurus-backend~
+
+     The thesaurus backend to use. This can also be set per buffer.
 
    - ~synosaurus-choose-method~
-     
+
      The way, ~synosaurus-choose-and-replace~ should query you for
      alternatives. The following symbols are acceptable values.
 
@@ -61,8 +53,8 @@
                 install popup.el separately.
 
      - ido :: Use IDO to show a nice fuzzy matching completing minibuffer.
-       
-     - t :: Use the normal minibuffer completion.
+
+     - default :: Use the normal minibuffer completion.
 
 ** Backends
 
@@ -70,14 +62,14 @@
    completion.
 
    *Openthesaurus* is a open German thesaurus and is supported quite well, but
-   needs an Internet connection to be queried. It's lookup function is called
-   ~openthesaurus-lookup~.
+   needs an Internet connection to be queried. It's backend function is called
+   ~synosaurus-backend-openthesaurus~.
 
    *Wordnet* is a English thesaurus, that can be installed as a separate program
    called /wn/, that is used offline. Wordnet can do lot's of things other than
-   simple lists of synonyms (for example synonym-groups). Not many of these
-   features are supported by synosaurus, yet. This is a goal for the future.
-   Wordnet's lookup function is called ~wordnet-lookup~.
+   simple lists of synonyms. Not many of these features are supported by
+   synosaurus, yet. Wordnet's backend function is called
+   ~synosaurus-backend-wordnet~.
 
 ** Dependencies
 
