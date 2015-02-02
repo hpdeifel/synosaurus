@@ -1,6 +1,6 @@
 ;;; synosaurus.el --- An Emacs frontend for thesauri
 
-;; Copyright (C) 2012  Hans-Peter Deifel
+;; Copyright (C) 2015  Hans-Peter Deifel
 
 ;; Author: Hans-Peter Deifel <hpdeifel@gmx.de>
 ;; Keywords: wp
