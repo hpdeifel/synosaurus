@@ -186,7 +186,7 @@ and replace the original word with that."
 
 (defvar synosaurus-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map synosaurus-prefix 'synosaurus-command-map)
+    (define-key map synosaurus-prefix synosaurus-command-map)
     map))
 
 ;;;###autoload
