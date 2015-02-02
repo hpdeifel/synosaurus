@@ -166,9 +166,9 @@ and replace the original word with that."
   (interactive "")
   (let* ((word (synosaurus-guess-default))
          (syns
-          (loop for syn in (synosaurus-internal-lookup word)
-                if (listp syn) append syn
-                else append (list syn))))
+          (cl-loop for syn in (synosaurus-internal-lookup word)
+                   if (listp syn) append syn
+                   else append (list syn))))
     (if (null syns) (message "No synonyms found for %s" word)
       (let ((res (synosaurus-choose syns)))
         (if (use-region-p)
