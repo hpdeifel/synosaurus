@@ -1,6 +1,6 @@
 ;;; synosaurus-wordnet.el --- Wordnet backend for synosaurus
 
-;; Copyright (C) 2012  Hans-Peter Deifel
+;; Copyright (C) 2015  Hans-Peter Deifel
 
 ;; Author: Hans-Peter Deifel <hpdeifel@gmx.de>
 ;; Keywords: wp
