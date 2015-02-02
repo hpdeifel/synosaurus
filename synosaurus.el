@@ -50,8 +50,9 @@ Valid values are:
   - ido           : Use IDO to read an alternative with completion
   - default       : Use normal minibuffer completion."
   :group 'synosaurus
-  :type  'symbol
-  :options '(popup ido default))
+  :type '(choice (const :tag "popup.el" popup)
+                 (const :tag "Ido" ido)
+                 (const :tag "Completing read" default)))
 
 (defcustom synosaurus-backend 'synosaurus-backend-wordnet
   "The backend for the thesaurus.
@@ -61,7 +62,9 @@ Built-in backends are
   - synosaurus-backend-wordnet        An english offline thesaurus
   - synosaurus-backend-openthesaurus  An german online thesaurus"
   :group 'synosaurus
-  :type  'function)
+  :type  '(choice (const :tag "Wordnet" synosaurus-backend-wordnet)
+                  (const :tag "OpenThesaurus" synosaurus-backend-openthesaurus)
+                  (function :tag "Other")))
 (make-variable-buffer-local 'synosaurus-backend)
 
 (defcustom synosaurus-prefix (kbd "C-c s")
