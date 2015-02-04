@@ -1,14 +1,21 @@
+[[http://melpa.org/#/synosaurus][http://melpa.org/packages/synosaurus-badge.svg]]
+
 * Synosaurus
 
   Synosaurus is a thesaurus fontend for Emacs with pluggable backends.
 
 ** Getting Started
 
-   - Add the synosaurus directory to your load-path:
+   - Synosaurus is available from [[http://melpa.org/][MELPA]]. Install it with:
+
+     : M-x package-install synosaurus
+
+     Or if you really want to install it manually, add the synosaurus directory
+     to your load-path:
 
      : (add-to-list 'load-path "/path/to/synosaurus")
 
-   - Enable the minor mode with ~synosaurus-mode~.
+   - Then enable the minor mode with ~synosaurus-mode~.
 
 ** Usage
 
