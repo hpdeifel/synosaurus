@@ -4,6 +4,8 @@
 
   Synosaurus is a thesaurus fontend for Emacs with pluggable backends.
 
+  [[file:screenshots/cnr.png]]
+
 ** Getting Started
 
    - Synosaurus is available from [[http://melpa.org/][MELPA]]. Install it with:
