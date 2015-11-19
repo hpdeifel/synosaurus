@@ -37,6 +37,8 @@
 (require 'thingatpt)
 (require 'ido)
 
+(declare-function popup-menu* "popup")
+
 (defgroup synosaurus nil "An extensible thesaurus mode"
   :group 'convenience
   :group 'text)
