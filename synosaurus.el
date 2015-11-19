@@ -65,7 +65,7 @@ Valid values are:
 Built-in backends are
 
   - synosaurus-backend-wordnet        An english offline thesaurus
-  - synosaurus-backend-openthesaurus  An german online thesaurus"
+  - synosaurus-backend-openthesaurus  A german online thesaurus"
   :group 'synosaurus
   :type  '(choice (const :tag "Wordnet" synosaurus-backend-wordnet)
                   (const :tag "OpenThesaurus" synosaurus-backend-openthesaurus)
