@@ -179,11 +179,12 @@ and replace the original word with that."
                    else append (list syn))))
     (if (null syns) (message "No synonyms found for %s" word)
       (let ((res (synosaurus-choose syns)))
-        (if (use-region-p)
-            (delete-region (region-beginning) (region-end))
-          (delete-region (beginning-of-thing 'word)
-                         (end-of-thing 'word)))
-        (insert res)))))
+        (when res
+          (if (use-region-p)
+              (delete-region (region-beginning) (region-end))
+            (delete-region (beginning-of-thing 'word)
+                           (end-of-thing 'word)))
+          (insert res))))))
 
 (defvar synosaurus-command-map
   (let ((map (make-sparse-keymap)))
