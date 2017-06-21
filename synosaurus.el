@@ -130,6 +130,7 @@ the words are clickable to look them up instead of the original
 word."
   (interactive (synosaurus-interactive))
   (let ((synonyms (synosaurus-internal-lookup word))
+        (backend synosaurus-backend)
         (inhibit-read-only t))
     (with-current-buffer (get-buffer-create "*Synonyms List*")
       (erase-buffer)
@@ -151,7 +152,8 @@ word."
       (goto-char (point-min))
       (condition-case nil (forward-button 1 t nil)
         (error nil))
-      (synosaurus-list-mode)))
+      (synosaurus-list-mode)
+      (setq-local synosaurus-backend backend)))
   (display-buffer "*Synonyms List*"))
 
 (defun synosaurus-choose (list)
