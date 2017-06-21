@@ -129,7 +129,8 @@ The resulting synonym list will be shown in a new buffer, where
 the words are clickable to look them up instead of the original
 word."
   (interactive (synosaurus-interactive))
-  (let ((inhibit-read-only t))
+  (let ((synonyms (synosaurus-internal-lookup word))
+        (inhibit-read-only t))
     (with-current-buffer (get-buffer-create "*Synonyms List*")
       (erase-buffer)
       (insert
@@ -141,7 +142,7 @@ word."
                     (insert-text-button syn
                                         'action 'synosaurus-button-action)
                     (insert "\n"))))
-        (dolist (syn (synosaurus-internal-lookup word))
+        (dolist (syn synonyms)
           (if (not (listp syn))
               (ins syn)
             (dolist (syn2 syn)
