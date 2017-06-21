@@ -3,4 +3,4 @@
 
   '((cl-lib "0.5"))
 
-  :url "https://github.com/rootzlevel/synosaurus")
+  :url "https://github.com/hpdeifel/synosaurus")
