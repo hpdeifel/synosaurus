@@ -72,7 +72,7 @@ Built-in backends are
                   (function :tag "Other")))
 (make-variable-buffer-local 'synosaurus-backend)
 
-(defcustom synosaurus-prefix (kbd "C-c s")
+(defcustom synosaurus-prefix (kbd "C-c C-s")
   "Synosaurus keymap prefix."
   :group 'synosaurus
   :type 'string)
