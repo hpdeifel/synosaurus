@@ -34,10 +34,10 @@
 
    The default keybindings are:
 
-   | Key       | Command                         |
-   |-----------+---------------------------------|
-   | =C-c s l= | ~synosaurus-lookup~             |
-   | =C-c s r= | ~synosaurus-choose-and-replace~ |
+   | Key         | Command                         |
+   |-------------+---------------------------------|
+   | =C-c C-s l= | ~synosaurus-lookup~             |
+   | =C-c C-s r= | ~synosaurus-choose-and-replace~ |
 
 ** Configuration
 
