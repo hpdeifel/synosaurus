@@ -1,6 +1,6 @@
 ;;; synosaurus-openthesaurus.el --- OpenThesaurus backend for synosaurus
 
-;; Copyright (C) 2017  Hans-Peter Deifel
+;; Copyright (C) 2019  Hans-Peter Deifel
 
 ;; Author: Hans-Peter Deifel <hpd@hpdeifel.de>
 ;; Keywords: wp
