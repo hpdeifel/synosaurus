@@ -76,7 +76,7 @@
    completion.
 
    *Openthesaurus* is a open German thesaurus and is supported quite well, but
-   needs an Internet connection to be queried. It's backend function is called
+   needs an Internet connection to be queried. Its backend function is called
    ~synosaurus-backend-openthesaurus~.
 
    *Wordnet* is a English thesaurus, that can be installed as a separate program
