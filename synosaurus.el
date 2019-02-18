@@ -88,11 +88,17 @@ Built-in backends are
   (set-text-properties 0 (length string) nil string)
   string)
 
-(defun synosaurus--guess-default ()
-  "Return region or word under cursor."
+(defun synosaurus--guess-default (&optional errorp)
+  "Return region or word under cursor.
+
+If `ERRORP' is non-nil, throw an error if the region is not
+active and there is no word at point."
   (if (use-region-p)
       (buffer-substring-no-properties (region-beginning) (region-end))
-    (synosaurus--strip-properties (thing-at-point 'word))))
+    (let ((word (thing-at-point 'word)))
+      (if (and (null word) errorp)
+          (error "No word at point.")
+        (synosaurus--strip-properties word)))))
 
 (defvar synosaurus--history nil)
 
@@ -178,7 +184,7 @@ and replace the original word with that.
 If the region is active, replace the region instead of the word
 at point."
   (interactive "")
-  (let* ((word (synosaurus--guess-default))
+  (let* ((word (synosaurus--guess-default t))
          (syns
           (cl-loop for syn in (synosaurus--internal-lookup word)
                    if (listp syn) append syn
