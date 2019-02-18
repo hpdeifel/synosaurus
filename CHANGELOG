@@ -1,0 +1,24 @@
+# -*- mode: org -*-
+
+* Next Release
+** Features
+
+- New command ~synosaurus-choose-and-insert~ bound to =C-c C-s i=.
+
+** Changes
+
+- Change default prefix from =C-c s= to =C-c C-s=.
+- Raise error in ~synosaurus-choose-and-replace~ if the region is not active and
+  no word is at point.
+
+** Bugfixes
+
+- Respect buffer-local value of ~synosaurus-backend~ in ~synosaurus-lookup~.
+- Don't delete text if ~synosaurus-choose~ returns ~nil~.
+
+* v0.1.0  [2015-02-15]
+
+The initial release featuring:
+
+- OpenThesaurus and Wordnet backends to choose from
+- ~completion-at-point~, ~ivy~ and ~popup.el~ as possible frontends
