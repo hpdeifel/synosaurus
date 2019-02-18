@@ -169,11 +169,14 @@ word."
 
 ;;;###autoload
 (defun synosaurus-choose-and-replace ()
-  "Replace the word under the cursor by a synonyme.
+  "Replace the word under the cursor by a synonym.
 
 Look up the word in the thesaurus specified by
 `synosaurus-backend', let the user choose an alternative
-and replace the original word with that."
+and replace the original word with that.
+
+If the region is active, replace the region instead of the word
+at point."
   (interactive "")
   (let* ((word (synosaurus--guess-default))
          (syns
