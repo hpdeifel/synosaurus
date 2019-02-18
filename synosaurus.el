@@ -198,10 +198,23 @@ at point."
                            (end-of-thing 'word)))
           (insert res))))))
 
+;;;###autoload
+(defun synosaurus-choose-and-insert (word)
+  "Look up `WORD' in the thesaurus, choose a synonym for `WORD',
+and insert it into the current buffer."
+  (interactive (synosaurus--interactive))
+  (let ((syns (cl-loop for syn in (synosaurus--internal-lookup word)
+                       if (listp syn) append syn
+                       else append (list syn))))
+    (if (null syns) (message "No synonyms found for %s" word)
+      (let ((res (synosaurus--choose syns)))
+        (when res (insert res))))))
+
 (defvar synosaurus-command-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "l") 'synosaurus-lookup)
     (define-key map (kbd "r") 'synosaurus-choose-and-replace)
+    (define-key map (kbd "i") 'synosaurus-choose-and-insert)
     map))
 (fset 'synosaurus-command-map synosaurus-command-map)
 
