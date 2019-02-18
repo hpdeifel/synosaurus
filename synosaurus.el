@@ -186,9 +186,10 @@ at point."
   (interactive "")
   (let* ((word (synosaurus--guess-default t))
          (syns
-          (cl-loop for syn in (synosaurus--internal-lookup word)
-                   if (listp syn) append syn
-                   else append (list syn))))
+          (delete-dups
+           (cl-loop for syn in (synosaurus--internal-lookup word)
+                    if (listp syn) append syn
+                    else append (list syn)))))
     (if (null syns) (message "No synonyms found for %s" word)
       (let ((res (synosaurus--choose syns)))
         (when res
@@ -203,9 +204,10 @@ at point."
   "Look up `WORD' in the thesaurus, choose a synonym for `WORD',
 and insert it into the current buffer."
   (interactive (synosaurus--interactive))
-  (let ((syns (cl-loop for syn in (synosaurus--internal-lookup word)
-                       if (listp syn) append syn
-                       else append (list syn))))
+  (let ((syns (delete-dups
+               (cl-loop for syn in (synosaurus--internal-lookup word)
+                        if (listp syn) append syn
+                        else append (list syn)))))
     (if (null syns) (message "No synonyms found for %s" word)
       (let ((res (synosaurus--choose syns)))
         (when res (insert res))))))
