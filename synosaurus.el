@@ -77,38 +77,38 @@ Built-in backends are
   :group 'synosaurus
   :type 'string)
 
-(defun synosaurus-internal-lookup (word)
+(defun synosaurus--internal-lookup (word)
   "Call current backend with `WORD'."
   (if synosaurus-backend
       (funcall synosaurus-backend word)
     (error "No thesaurus lookup function specified")))
 
-(defun synosaurus-strip-properties (string)
+(defun synosaurus--strip-properties (string)
   "Remove text properties from `STRING'."
   (set-text-properties 0 (length string) nil string)
   string)
 
-(defun synosaurus-guess-default ()
+(defun synosaurus--guess-default ()
   "Return region or word under cursor."
   (if (use-region-p)
       (buffer-substring-no-properties (region-beginning) (region-end))
-    (synosaurus-strip-properties (thing-at-point 'word))))
+    (synosaurus--strip-properties (thing-at-point 'word))))
 
-(defvar synosaurus-history nil)
+(defvar synosaurus--history nil)
 
-(defun synosaurus-interactive ()
+(defun synosaurus--interactive ()
   "Ask the user for a word (with default)."
-  (let* ((default (synosaurus-guess-default))
+  (let* ((default (synosaurus--guess-default))
          (res (read-string (if default
                                (format "Word (default %s): " default)
                              "Word: ")
-                           nil 'synosaurus-history)))
+                           nil 'synosaurus--history)))
     (list
      (if (not (string= res ""))
          res
        default))))
 
-(defun synosaurus-button-action (arg)
+(defun synosaurus--button-action (arg)
   (synosaurus-lookup (button-label arg)))
 
 (defvar synosaurus-list-mode-map
@@ -128,8 +128,8 @@ Queries the user for a word and looks it up in a thesaurus using
 The resulting synonym list will be shown in a new buffer, where
 the words are clickable to look them up instead of the original
 word."
-  (interactive (synosaurus-interactive))
-  (let ((synonyms (synosaurus-internal-lookup word))
+  (interactive (synosaurus--interactive))
+  (let ((synonyms (synosaurus--internal-lookup word))
         (backend synosaurus-backend)
         (inhibit-read-only t))
     (with-current-buffer (get-buffer-create "*Synonyms List*")
@@ -141,7 +141,7 @@ word."
                   (unless (string= word syn)
                     (insert " ")
                     (insert-text-button syn
-                                        'action 'synosaurus-button-action)
+                                        'action 'synosaurus--button-action)
                     (insert "\n"))))
         (dolist (syn synonyms)
           (if (not (listp syn))
@@ -156,7 +156,7 @@ word."
       (setq-local synosaurus-backend backend)))
   (display-buffer "*Synonyms List*"))
 
-(defun synosaurus-choose (list)
+(defun synosaurus--choose (list)
   "Choose among a `LIST' of values."
   (let ((completion-prompt "Replacement: "))
    (pcase synosaurus-choose-method
@@ -175,13 +175,13 @@ Look up the word in the thesaurus specified by
 `synosaurus-backend', let the user choose an alternative
 and replace the original word with that."
   (interactive "")
-  (let* ((word (synosaurus-guess-default))
+  (let* ((word (synosaurus--guess-default))
          (syns
-          (cl-loop for syn in (synosaurus-internal-lookup word)
+          (cl-loop for syn in (synosaurus--internal-lookup word)
                    if (listp syn) append syn
                    else append (list syn))))
     (if (null syns) (message "No synonyms found for %s" word)
-      (let ((res (synosaurus-choose syns)))
+      (let ((res (synosaurus--choose syns)))
         (when res
           (if (use-region-p)
               (delete-region (region-beginning) (region-end))

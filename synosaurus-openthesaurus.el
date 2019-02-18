@@ -29,20 +29,20 @@
 
 (require 'cl-lib)
 
-(defvar openthesaurus-url
+(defvar synosaurus-openthesaurus--url
   "http://www.openthesaurus.de/synonyme/search?q=%s&format=text/xml")
 
-(defun openthesaurus-xml-collect (tree path fun)
+(defun synosaurus-openthesaurus--xml-collect (tree path fun)
   (when (and path (eq (car path) (car tree)))
     (if (null (cdr path))
         (funcall fun tree)
       (cl-loop for child in (cddr tree)
-            for res = (openthesaurus-xml-collect child (cdr path) fun)
+            for res = (synosaurus-openthesaurus--xml-collect child (cdr path) fun)
             when res collect res))))
 
 ;;;###autoload
 (defun synosaurus-backend-openthesaurus (word)
-  (let ((buf (url-retrieve-synchronously (format openthesaurus-url
+  (let ((buf (url-retrieve-synchronously (format synosaurus-openthesaurus--url
                                                  (url-hexify-string word)))))
     (if (not buf)
         (error "could not retrieve openthesaurus data")
@@ -52,7 +52,7 @@
         (forward-line)
         (let ((xml (libxml-parse-xml-region (point) (point-max))))
           (kill-buffer)
-          (openthesaurus-xml-collect xml '(matches synset term)
+          (synosaurus-openthesaurus--xml-collect xml '(matches synset term)
                                      (lambda (x) (cdr (assoc 'term (cadr x))))))))))
 
 (provide 'synosaurus-openthesaurus)

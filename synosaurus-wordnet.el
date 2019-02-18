@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;;; A english thesaurus
+;;; An English thesaurus
 ;;;
 ;;; You will need to have the wn programm installed
 
@@ -28,30 +28,30 @@
 
 (require 'synosaurus)
 
-(defvar wordnet-command "wn")
-(defvar wordnet-options '("-synsv" "-synsn" "-synsa" "-synsr"))
+(defvar synosaurus-wordnet--command "wn")
+(defvar synosaurus-wordnet--options '("-synsv" "-synsn" "-synsa" "-synsr"))
 
-(defun wordnet-chomp (str)
+(defun synosaurus-wordnet--chomp (str)
   (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'"
                        str)
     (setq str (replace-match "" t t str)))
   str)
 
-(defun wordnet-collect-list ()
+(defun synosaurus-wordnet--collect-list ()
   (let ((p (point)))
     (end-of-line)
     (let* ((str (buffer-substring p (point)))
            (list (split-string str "," t))
-           (stripped (mapcar 'wordnet-chomp list)))
+           (stripped (mapcar 'synosaurus-wordnet--chomp list)))
       stripped)))
 
-(defun wordnet-parse-buffer ()
+(defun synosaurus-wordnet--parse-buffer ()
   (let ((words))
     (goto-char (point-min))
     (while (search-forward-regexp "^Sense" nil t)
       (forward-line 1)
       (beginning-of-line)
-      (push (wordnet-collect-list) words))
+      (push (synosaurus-wordnet--collect-list) words))
     words))
 
 ;;;###autoload
@@ -59,8 +59,8 @@
   (let ((buf (get-buffer-create "*Wordnet*")))
     (with-current-buffer buf
       (erase-buffer)
-      (apply 'call-process wordnet-command nil buf nil word wordnet-options)
-      (wordnet-parse-buffer))))
+      (apply 'call-process synosaurus-wordnet--command nil buf nil word synosaurus-wordnet--options)
+      (synosaurus-wordnet--parse-buffer))))
 
 
 (provide 'synosaurus-wordnet)
