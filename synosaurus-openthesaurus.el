@@ -1,4 +1,4 @@
-;;; synosaurus-openthesaurus.el --- OpenThesaurus backend for synosaurus
+;;; synosaurus-openthesaurus.el --- OpenThesaurus backend for synosaurus  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2019  Hans-Peter Deifel
 

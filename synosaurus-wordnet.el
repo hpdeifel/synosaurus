@@ -1,4 +1,4 @@
-;;; synosaurus-wordnet.el --- Wordnet backend for synosaurus
+;;; synosaurus-wordnet.el --- Wordnet backend for synosaurus  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2019  Hans-Peter Deifel
 

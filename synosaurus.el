@@ -1,4 +1,4 @@
-;;; synosaurus.el --- An Emacs frontend for thesauri
+;;; synosaurus.el --- An Emacs frontend for thesauri  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2019  Hans-Peter Deifel
 
