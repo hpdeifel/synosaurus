@@ -32,12 +32,17 @@
         with you selection. You can configure different methods for the
         alternative selection, see below.
 
+   - ~synosaurus-choose-and-insert~ :: Asks for a word, presents a list of
+        synonyms to choose from, and inserts the selected one into the current
+        buffer.
+
    The default keybindings are:
 
-   | Key         | Command                         |
-   |-------------+---------------------------------|
+   | Key       | Command                       |
+   |-----------+-------------------------------|
    | =C-c C-s l= | ~synosaurus-lookup~             |
    | =C-c C-s r= | ~synosaurus-choose-and-replace~ |
+   | =C-c C-s i= | ~synosaurus-choose-and-insert~  |
 
 ** Configuration
 
