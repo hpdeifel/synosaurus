@@ -108,11 +108,8 @@ active and there is no word at point."
          (res (read-string (if default
                                (format "Word (default %s): " default)
                              "Word: ")
-                           nil 'synosaurus--history)))
-    (list
-     (if (not (string= res ""))
-         res
-       default))))
+                           nil 'synosaurus--history default)))
+    (list res)))
 
 (defun synosaurus--button-action (arg)
   (synosaurus-lookup (button-label arg)))
