@@ -1,4 +1,4 @@
-[[http://melpa.org/#/synosaurus][http://melpa.org/packages/synosaurus-badge.svg]]
+[[https://melpa.org/#/synosaurus][https://melpa.org/packages/synosaurus-badge.svg]]
 
 * Synosaurus
 
@@ -8,7 +8,7 @@
 
 ** Getting Started
 
-   - Synosaurus is available from [[http://melpa.org/][MELPA]]. Install it with:
+   - Synosaurus is available from [[https://melpa.org/][MELPA]]. Install it with:
 
      : M-x package-install synosaurus
 

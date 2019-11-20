@@ -30,7 +30,7 @@
 (require 'cl-lib)
 
 (defvar synosaurus-openthesaurus--url
-  "http://www.openthesaurus.de/synonyme/search?q=%s&format=text/xml")
+  "https://www.openthesaurus.de/synonyme/search?q=%s&format=text/xml")
 
 (defun synosaurus-openthesaurus--xml-collect (tree path fun)
   (when (and path (eq (car path) (car tree)))
