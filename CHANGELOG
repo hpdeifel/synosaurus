@@ -1,6 +1,6 @@
 # -*- mode: org -*-
 
-* Next Release
+* v0.2.0  [2019-11-25]
 ** Features
 
 - New command ~synosaurus-choose-and-insert~ bound to =C-c C-s i=.
