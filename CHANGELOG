@@ -17,6 +17,7 @@
 - Don't delete text if ~synosaurus-choose~ returns ~nil~.
 - Don't offer duplicate completion candidates in ~synosaurus-choose-and-replace~
   and ~synosaurus-choose-and-insert~.
+- Use TLS for all HTTP requests
 
 * v0.1.0  [2015-02-15]
 
