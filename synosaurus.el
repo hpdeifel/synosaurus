@@ -65,10 +65,12 @@ Valid values are:
 Built-in backends are
 
   - synosaurus-backend-wordnet        An english offline thesaurus
-  - synosaurus-backend-openthesaurus  A german online thesaurus"
+  - synosaurus-backend-openthesaurus  A german online thesaurus
+  - synosaurus-backend-moby           An english offline thesaurus"
   :group 'synosaurus
   :type  '(choice (const :tag "Wordnet" synosaurus-backend-wordnet)
                   (const :tag "OpenThesaurus" synosaurus-backend-openthesaurus)
+                  (const :tag "Moby Thesaurus" synosaurus-backend-moby)
                   (function :tag "Other")))
 (make-variable-buffer-local 'synosaurus-backend)
 
