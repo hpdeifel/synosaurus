@@ -20,6 +20,8 @@
 ;;; Commentary:
 
 ;;; An interface to the public domain Moby thesaurus.
+;;; The Moby Thesaurus is ~24MB and can be downloaded from:
+;;; https://www.gutenberg.org/files/3202/files/mthesaur.txt
 
 ;;; Code:
 
