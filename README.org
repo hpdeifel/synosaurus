@@ -72,7 +72,7 @@
 
 ** Backends
 
-   Two thesaurus backends are implemented right now in various states of
+   Three thesaurus backends are implemented right now in various states of
    completion.
 
    *Openthesaurus* is a open German thesaurus and is supported quite well, but
@@ -84,6 +84,11 @@
    simple lists of synonyms. Not many of these features are supported by
    synosaurus, yet. Wordnet's backend function is called
    ~synosaurus-backend-wordnet~.
+
+   *LEO* is an online dictionary supporting a small number of language pairs
+   involving English or German. Only German -> English translations are
+   supported at the moment. Its backend function is called
+   ~synosaurus-backend-leo~.
 
 ** Dependencies
 
