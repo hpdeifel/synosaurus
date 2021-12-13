@@ -78,7 +78,8 @@ Loads from PATH, or ‘synosaurus-moby-path’ if nil."
 
 ;;;###autoload
 (defun synosaurus-backend-moby (word)
-  (when (null synosaurus-moby--buffer)
+  (when (or (null synosaurus-moby--buffer)
+            (not (buffer-live-p synosaurus-moby--buffer)))
     (synosaurus-moby-load))
   (with-current-buffer synosaurus-moby--buffer
     (let* ((main (synosaurus-moby--main-synonyms word))
