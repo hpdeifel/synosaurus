@@ -50,11 +50,10 @@ Loads from PATH, or ‘synosaurus-moby-path’ if nil."
       (user-error "Moby thesaurus file not found at %s"
                   synosaurus-moby-path))
     (setq synosaurus-moby--buffer
-          (find-file-noselect real-path
-                              t
-                              t))
+          (generate-new-buffer  " *Synosaurus Moby thesaurus*" t))
     (with-current-buffer synosaurus-moby--buffer
-      (rename-buffer " *Synosaurus Moby thesaurus*"))))
+      (let ((large-file-warning-threshold (expt 2 25)))
+        (insert-file real-path)))))
 
 (defun synosaurus-moby--main-synonyms (word)
   (let ((case-fold-search t))
